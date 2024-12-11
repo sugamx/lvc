@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Photo Gallery</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .container {
+            display: flex; /* Use flexbox for layout */
+            gap: 20px; /* Space between table and profile details */
+        }
+
+        table {
+            width: 60%; /* Table takes up 60% of the width */
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
+
+        .profile-details {
+            width: 40%; /* Profile details take up 40% of the width */
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            display: none; /* Initially hide profile details */
+        }
+
+        .profile-details img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+
+        .profile-details video {
+            width: 100%; /* Make video responsive */
+            height: auto;
+            margin-top: 10px;
+        }
+
+        .profile-details h3 {
+            margin: 10px 0 5px;
+        }
+
+        .profile-details p {
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <h2>Photo Gallery</h2>
+    <div class="container">
+        <!-- Table Section -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Designation</th>
+                </tr>
+            </thead>
+            <tbody id="profile-table-body">
+                <!-- Rows will be dynamically generated here -->
+            </tbody>
+        </table>
+
+        <!-- Profile Details Section -->
+        <div class="profile-details" id="profile-details">
+            <p>Select a name to view details.</p>
+        </div>
+    </div>
+
+    <script>
+        // Data array for profiles
+        const profiles = [
+            {
+                name: "John Doe",
+                designation: "Software Engineer",
+                photo: "../images/profile1.jpg",
+                video: "../videos/intv1.mp4"
+            },
+            {
+                name: "Jane Smith",
+                designation: "Project Manager",
+                photo: "../images/profile2.jpg",
+                video: "../videos/intv2.mp4"
+            },
+            {
+                name: "Emily Johnson",
+                designation: "Data Scientist",
+                photo: "../images/profile3.jpg",
+                video: "../videos/intv3.mp4"
+            },
+            {
+                name: "Michael Brown",
+                designation: "UX Designer",
+                photo: "../images/profile4.jpg",
+                video: "../videos/intv4.mp4"
+            }
+        ];
+
+        // Reference to the table body and profile details container
+        const tableBody = document.getElementById("profile-table-body");
+        const profileDetailsDiv = document.getElementById("profile-details");
+
+        // Function to generate table rows dynamically
+        function generateTableRows() {
+            profiles.forEach(profile => {
+                // Create a new row
+                const row = document.createElement("tr");
+                row.dataset.profile = JSON.stringify(profile);
+
+                // Create columns for the row (without profile photo in the table)
+                row.innerHTML = `
+                    <td><a href="#" class="profile-link">${profile.name}</a></td>
+                    <td>${profile.designation}</td>
+                `;
+
+                // Add event listener to the profile link
+                row.querySelector(".profile-link").addEventListener("click", (event) => {
+                    event.preventDefault();
+                    showProfileDetails(profile);
+                });
+
+                // Append the row to the table body
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Function to show profile details when a name is clicked
+        function showProfileDetails(profile) {
+            profileDetailsDiv.innerHTML = `
+                <img src="${profile.photo}" alt="${profile.name}">
+                <h3>${profile.name}</h3>
+                <p>${profile.designation}</p>
+                <video controls>
+                    <source src="${profile.video}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            `;
+
+            // Show the profile details container
+            profileDetailsDiv.style.display = 'block';
+        }
+
+        // Generate the table rows on page load
+        document.addEventListener("DOMContentLoaded", generateTableRows);
+    </script>
+</body>
+</html>
