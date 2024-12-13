@@ -206,6 +206,7 @@ nav ul li a:hover {
 .card {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     animation: fadeInUp 1s ease-in-out;
+    border-radius: 30px;
 }
 
 .card:hover {
