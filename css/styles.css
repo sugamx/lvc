@@ -25,7 +25,7 @@ body {
     position: absolute;
     top: 100%;
     left: 0;
-    background-color: #34495e;
+    background-color: #fdfdfd;
     border-radius: 8px;
     padding: 10px 0;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
@@ -63,7 +63,7 @@ body {
     left: 100%;
     margin-left: 5px;
     border-radius: 8px;
-    background-color: #e2e3e4;
+    background-color: #dfe8f5;
 }
 
 .navbar .dropdown-menu li:hover > .dropdown-menu {
