@@ -18,6 +18,66 @@ body {
     animation: gradientAnimation 10s ease infinite;
 }
 
+       
+/* Dropdown Menu Styling */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #34495e;
+    border-radius: 8px;
+    padding: 10px 0;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+.navbar .dropdown:hover > .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu li {
+    white-space: nowrap;
+}
+
+.dropdown-menu li a {
+    display: block;
+    padding: 10px 20px;
+    color: #000000;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background-color 0.3s ease, padding-left 0.3s ease;
+}
+
+.dropdown-menu li a:hover {
+    background-color: #1abc9c;
+    padding-left: 25px;
+    color: #fff;
+}
+
+/* Nested Dropdown Menu */
+.dropdown-menu .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 100%;
+    margin-left: 5px;
+    border-radius: 8px;
+    background-color: #e2e3e4;
+}
+
+.navbar .dropdown-menu li:hover > .dropdown-menu {
+    display: block;
+}
+
+
+.navdrop a{
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    
+
+}
+
 @keyframes gradientAnimation {
     0% {
         background-position: 0% 50%;

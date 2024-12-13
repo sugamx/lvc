@@ -48,3 +48,29 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+// Get all the menu items
+const dropdownItems = document.querySelectorAll('.nav-item');
+
+dropdownItems.forEach(item => {
+    item.addEventListener('click', function (e) {
+        // Prevent the default action
+        e.stopPropagation();
+
+        // Close all other dropdowns
+        dropdownItems.forEach(otherItem => {
+            if (otherItem !== item) {
+                otherItem.classList.remove('active');
+            }
+        });
+
+        // Toggle the active class for the clicked item
+        item.classList.toggle('active');
+    });
+});
+
+// Close dropdowns if clicked outside
+document.addEventListener('click', function () {
+    dropdownItems.forEach(item => {
+        item.classList.remove('active');
+    });
+});
