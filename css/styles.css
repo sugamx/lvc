@@ -15,6 +15,7 @@ body {
     animation: gradientAnimation 10s ease infinite;
 }
 
+
        
 /* Dropdown Menu Styling */
 .dropdown-menu {
@@ -146,6 +147,7 @@ header {
 }
 .nav {
 background-color: #181313;
+margin-bottom: 0;
 }
 /* Navigation Bar */
 nav ul {

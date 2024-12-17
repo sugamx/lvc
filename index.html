@@ -50,37 +50,67 @@
           </div>
           
           <style>
-            #carouselExample {
-              width: 100%; /* Full width of the container */
-              height: 300px; /* Fixed height for banner */
-              overflow: hidden; /* Ensure the images stay within the fixed dimensions */
-            }
-          
-            .carousel-inner {
-              width: 100%;
-              height: 100%;
-            }
-          
-            .carousel-item img {
-              width: 100%;
-              height: 100%;
-              object-fit: cover; /* This ensures the image covers the entire space without distortion */
-            }
-          
-            .carousel-control-prev-icon, .carousel-control-next-icon {
-              background-color: black; /* Customize the control icons if needed */
-            }
-            
-            .tag1 {
-              position: absolute;
-              top: 50%;
-              left: 50%;
-              transform: translate(-50%, -50%);
-              color: white;
-              font-size: 2rem;
-              font-weight: bold;
-              text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-            }
+           /* Carousel settings */
+#carouselExample {
+  width: 100%; /* Full width of the container */
+  height: 50vh; 
+  margin-top: 0;/* Dynamic height depending on viewport */
+  overflow: hidden; /* Ensure the images stay within the fixed dimensions */
+  position: relative; /* Make sure content is positioned properly */
+}
+
+/* Ensures carousel takes up full height */
+.carousel-inner {
+  width: 100%;
+  height: 100%;
+}
+
+/* Makes sure the images fill the container without distortion */
+.carousel-item img {
+  width: 100%;
+  margin-bottom: 0;
+  height: 100%;
+  object-fit: cover; /* This ensures the image covers the entire space without distortion */
+}
+
+/* Position the text in the middle of the image */
+.tag1 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 3rem; /* Adjust font size for larger screens */
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  text-align: center; /* Center the text */
+  padding: 0 10px; /* Ensure text does not get too close to edges */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  /* Reduce the height of the carousel on smaller screens */
+  #carouselExample {
+    height: 40vh;
+  }
+
+  .tag1 {
+    font-size: 2rem; /* Smaller font size for smaller screens */
+  }
+}
+
+@media (max-width: 576px) {
+  /* Further reduce the height and adjust text for very small screens */
+  #carouselExample {
+    height: 35vh;
+  }
+
+  .tag1 {
+    font-size: 1.5rem; /* Even smaller font size */
+    padding: 0 5px; /* Less padding on very small screens */
+  }
+}
+
           </style>
           
         <nav>
