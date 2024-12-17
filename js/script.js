@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
         "registration": '<iframe id="registration-iframe" src="Registration/registration.html" frameborder="0" style="width: 100%; height: 500px;"></iframe>',
         "photo-gallery": '<iframe id="photo-gallery-iframe" src="PhotoGallery/photo-gallery.html" frameborder="0" style="width: 100%; height: 500px;"></iframe>',
         blog: "<iframe src='blog/blog.html' frameborder='0' style='width: 100%; height: 500px;'></iframe>",
-        help: "<h2>Help</h2><p>Need help? Find resources here.</p>",
+        help: "<iframe src='help/help.html' frameborder='0' style='width: 100%; height: 500px;'></iframe>",
         "contact-us": `
  <iframe 
     src="ContactForm/contact-form.html" 

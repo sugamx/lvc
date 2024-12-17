@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap Grid Layout</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Custom Styles */
+        .top-navigation {
+            background-color: #f8f9fa;
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ccc;
+        }
+        .logo {
+            background-color: #d4edda;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid #28a745;
+        }
+        .header {
+            background-color: #cce5ff;
+            padding: 30px;
+            text-align: center;
+            border: 1px solid #007bff;
+        }
+        .column, .main-content {
+            border: 1px solid #ddd;
+            padding: 20px;
+            text-align: center;
+            margin-top: 10px;
+            background-color: #f1f1f1;
+        }
+        .column {
+            background-color: #fff3cd;
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Navigation -->
+    <div class="container-fluid top-navigation">
+        <div class="row">
+            <div class="col-12">
+                <h5>Top Navigation</h5>
+            </div>
+        </div>
+    </div>
+
+    <!-- Logo Section -->
+    <div class="container-fluid logo">
+        <div class="row">
+            <div class="col-12">
+                <h3>Logo</h3>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header Section -->
+    <div class="container-fluid header">
+        <div class="row">
+            <div class="col-12">
+                <h2>Header</h2>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Section -->
+    <div class="container">
+        <div class="row">
+            <!-- Column 1 -->
+            <div class="col-md-3 column">
+                <h5>Column 1</h5>
+                <p>Some dummy content for Column 1.</p>
+            </div>
+            <!-- Main Content -->
+            <div class="col-md-6 main-content">
+                <h5>Main Content</h5>
+                <p>This is the central content area. Add your primary information here.</p>
+            </div>
+            <!-- Column 3 -->
+            <div class="col-md-3 column">
+                <h5>Column 3</h5>
+                <p>Some dummy content for Column 3.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS (optional) -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
