@@ -9,14 +9,59 @@
 
 <body>
     <h2>Welcome to Class</h2>
-    <p>A live virtual class is an online learning environment where instructors and students interact in real-time. This setup closely mimics traditional classroom experiences but takes place over the internet. Here are some key features:
-        Real-Time Interaction: Students and instructors engage through live video, audio, and chat, allowing for immediate feedback and dynamic discussions1.
-        Interactive Tools.</p>
+    <p>
+        A live virtual class is an online learning environment where instructors and students interact in real-time. This setup closely mimics traditional classroom experiences but takes place over the internet. Here are some key features:
+        Real-Time Interaction: Students and instructors engage through live video, audio, and chat, allowing for immediate feedback and dynamic discussions.
+        Interactive Tools.
+    </p>
+
+    <!-- Video Container -->
     <div class="video-container">
-        <video controls>
+        <video id="video-preview" controls>
             <source src="../videos/lvvid.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
     </div>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox">
+        <div class="lightbox-content">
+            <span class="close-btn" id="close-btn">&times;</span>
+            <video id="lightbox-video" autoplay controls>
+                <source src="../videos/lvvid.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
+
+    <script>
+        // Lightbox Logic
+        const videoPreview = document.getElementById('video-preview');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxVideo = document.getElementById('lightbox-video');
+        const closeBtn = document.getElementById('close-btn');
+
+        // Open Lightbox
+        videoPreview.addEventListener('click', () => {
+            lightbox.style.display = 'flex';
+            lightboxVideo.play(); // Play the video
+        });
+
+        // Close Lightbox
+        closeBtn.addEventListener('click', () => {
+            lightbox.style.display = 'none';
+            lightboxVideo.pause(); // Pause the video
+            lightboxVideo.currentTime = 0; // Reset video
+        });
+
+        // Close when clicking outside the video
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                lightbox.style.display = 'none';
+                lightboxVideo.pause();
+                lightboxVideo.currentTime = 0;
+            }
+        });
+    </script>
 </body>
 </html>
