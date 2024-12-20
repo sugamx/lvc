@@ -238,17 +238,20 @@ nav ul li a:hover {
     }
 }
 
-
 /* Global Styling */
 main {
     display: flex;
     justify-content: center;
-    align-items: center; /* Center the content vertically */
+    align-items: center;
     padding: 20px;
     background-color: #f4f4f4;
-    height: 100vh; /* Full viewport height */
-    margin: 0; /* Remove margin */
-    overflow: hidden; /* Hide scrollbars on the main container */
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+    /* Add this to ensure crisp rendering */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    backface-visibility: hidden;
 }
 
 .content-box {
@@ -256,36 +259,39 @@ main {
     max-width: 1200px;
     border-radius: 10px;
     padding: 20px;
-    background-color: #fff; /* White background for contrast */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Add depth with shadow */
-    height: auto; /* Allow height to adjust based on content */
-    max-height: 90vh; /* Ensure it doesn't exceed the viewport */
-    overflow-y: auto; /* Enable scroll only if content exceeds */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+    background-color: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    height: auto;
+    max-height: 90vh;
+    overflow-y: auto;
+    /* Modify the transition to be more specific */
+    transition: box-shadow 0.3s ease;
+    /* Add these properties to prevent blur */
+    transform: translateZ(0);
+    will-change: box-shadow;
 }
 
 .content-box:hover {
-    transform: scale(1.02); /* Slight zoom effect */
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Increase shadow on hover */
+    /* Remove the scale transform to prevent blur */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
 }
 
 #dynamic-content {
     font-size: 1rem;
     color: #333;
-    line-height: 1.6; /* Improve text readability */
+    line-height: 1.6;
     text-align: justify;
+    /* Add this to ensure crisp text rendering */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 /* Responsive Adjustments */
 @media (max-width: 768px) {
     .content-box {
         width: 90%;
-        max-width: 100%; /* Allow full width on smaller devices */
+        max-width: 100%;
     }
-}
-#dynamic-content {
-    font-size: 1rem;
-    color: #333;
 }
 
 /* Footer */
