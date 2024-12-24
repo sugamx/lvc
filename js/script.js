@@ -1,4 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
+
+ // Display a welcome message when the page loads
+    alert("Welcome to my website!");
     // Content for each menu item
     const contentMap = {
         home: '<iframe id="home-iframe" src="home/home.html" frameborder="0" style="width: 100%; height: 500px;"></iframe>',
@@ -62,3 +65,5 @@ document.addEventListener('click', function () {
         item.classList.remove('active');
     });
 });
+
+

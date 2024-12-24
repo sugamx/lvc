@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You</title>
+    <link rel="stylesheet" href="registration.css">
+    <style>
+        .thank-you-container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .registration-details {
+            margin-top: 20px;
+        }
+        .detail-item {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="thank-you-container">
+        <h2>Thank You for Registering!</h2>
+        <p>Your registration has been successfully submitted.</p>
+        
+        <div class="registration-details">
+            <h3>Registration Details:</h3>
+            <div id="formDetails"></div>
+        </div>
+    </div>
+
+    <script>
+        // Retrieve and display form data
+        window.addEventListener('DOMContentLoaded', () => {
+            const formData = JSON.parse(sessionStorage.getItem('formData'));
+            if (formData) {
+                const formDetails = document.getElementById('formDetails');
+                const courseNames = {
+                    'mean': 'MEAN Stack',
+                    'mern': 'MERN Stack',
+                    'gen-ai': 'Gen AI'
+                };
+
+                formDetails.innerHTML = `
+                    <div class="detail-item"><strong>Name:</strong> ${formData.fullName}</div>
+                    <div class="detail-item"><strong>Email:</strong> ${formData.email}</div>
+                    <div class="detail-item"><strong>Phone:</strong> ${formData.phone}</div>
+                    <div class="detail-item"><strong>Course:</strong> ${courseNames[formData.course]}</div>
+                    ${formData.message ? `<div class="detail-item"><strong>Additional Message:</strong> ${formData.message}</div>` : ''}
+                `;
+
+                // Clear the session storage
+                sessionStorage.removeItem('formData');
+            }
+        });
+    </script>
+</body>
+</html>
