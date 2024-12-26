@@ -2,81 +2,97 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.querySelector('.contact-form');
-    
-    // Show error function
-    const showError = (input, message) => {
-        const errorDiv = input.parentElement.querySelector('.error-message') || 
-            createErrorDiv(input.parentElement);
-        errorDiv.textContent = message;
-        errorDiv.style.display = message ? 'block' : 'none';
-        input.style.borderColor = message ? 'red' : '#ccc';
-    };
 
-    // Create error div
-    const createErrorDiv = (parent) => {
-        const div = document.createElement('div');
-        div.className = 'error-message';
-        parent.appendChild(div);
-        return div;
-    };
-
-    // Validate input fields
-    const validate = (input) => {
-        const value = input.value.trim();
-        
-        switch(input.id) {
-            case 'name':
-                if (!value) return 'Name is required';
-                if (value.length < 2) return 'Name must be at least 2 characters';
-                break;
-                
-            case 'email':
-                if (!value) return 'Email is required';
-                if (!value.includes('@')) return 'Please enter a valid email';
-                break;
-                
-            case 'message':
-                if (!value) return 'Message is required';
-                if (value.length < 10) return 'Message must be at least 10 characters';
-                break;
-        }
+    // Validation functions for each field
+    const validateName = (value) => {
+        if (!value) return 'Please enter your name';
+        if (value.length < 2) return 'Name must be at least 2 characters';
+        if (!/^[a-zA-Z\s]*$/.test(value)) return 'Name should only contain letters and spaces';
         return '';
     };
 
-    // Add blur event listeners to all inputs and textarea
-    document.querySelectorAll('input, textarea').forEach(input => {
-        input.addEventListener('blur', () => {
-            showError(input, validate(input));
-        });
+    const validateEmail = (value) => {
+        if (!value) return 'Please enter your email';
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(value)) return 'Please enter a valid email address';
+        return '';
+    };
+
+    const validateMessage = (value) => {
+        if (!value) return 'Please enter your message';
+        if (value.length < 10) return 'Message must be at least 10 characters';
+        return '';
+    };
+
+    // Show alert messages function
+    const showAlerts = (errors) => {
+        if (errors.length > 0) {
+            let alertMessage = 'Please fix the following:\n\n';
+            errors.forEach(error => {
+                alertMessage += `• ${error}\n`;
+            });
+            alert(alertMessage);
+            return false;
+        }
+        return true;
+    };
+
+    // Add blur event listeners for real-time validation
+    document.getElementById('name').addEventListener('blur', function() {
+        const error = validateName(this.value.trim());
+        if (error) alert(error);
     });
 
-    // Form submission
+    document.getElementById('email').addEventListener('blur', function() {
+        const error = validateEmail(this.value.trim());
+        if (error) alert(error);
+    });
+
+    document.getElementById('message').addEventListener('blur', function() {
+        const error = validateMessage(this.value.trim());
+        if (error) alert(error);
+    });
+
+    // Form submission handler
     form.addEventListener('submit', (e) => {
         e.preventDefault();
-        let isValid = true;
 
-        // Check all inputs
-        document.querySelectorAll('input, textarea').forEach(input => {
-            const error = validate(input);
-            showError(input, error);
-            if (error) isValid = false;
-        });
+        // Get all input values
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const message = document.getElementById('message').value.trim();
 
-        if (isValid) {
-            alert('Form submitted successfully!');
-            form.reset();
+        // Collect all errors
+        const errors = [];
+        
+        const nameError = validateName(name);
+        if (nameError) errors.push(nameError);
+        
+        const emailError = validateEmail(email);
+        if (emailError) errors.push(emailError);
+        
+        const messageError = validateMessage(message);
+        if (messageError) errors.push(messageError);
+
+        // Show errors if any
+        if (!showAlerts(errors)) {
+            return;
         }
+
+        // If no errors, show success and submit
+        alert('Thank you for your message!\nWe will get back to you soon.');
+        
+        // Create form data object
+        const formData = {
+            name,
+            email,
+            message,
+            timestamp: new Date().toISOString()
+        };
+
+        console.log('Form submitted:', formData);
+        
+        // Reset form
+        form.reset();
     });
 });
-
-// Add CSS
-document.head.appendChild(Object.assign(document.createElement('style'), {
-    textContent: `
-        .error-message {
-            color: red;
-            font-size: 12px;
-            margin-top: 5px;
-            display: none;
-        }
-    `
-}));

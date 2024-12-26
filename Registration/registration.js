@@ -1,57 +1,37 @@
 // Form validation functions
 const validateFullName = (name) => {
-    if (name.length < 3) {
-        return 'Full name must be at least 3 characters long';
-    }
-    if (!/^[a-zA-Z\s]*$/.test(name)) {
-        return 'Full name should only contain letters and spaces';
-    }
+    if (!name) return 'Please enter your full name';
+    if (name.length < 3) return 'Full name must be at least 3 characters long';
+    if (!/^[a-zA-Z\s]*$/.test(name)) return 'Full name should only contain letters and spaces';
     return '';
 };
 
 const validateEmail = (email) => {
+    if (!email) return 'Please enter your email address';
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-        return 'Please enter a valid email address';
-    }
+    if (!emailRegex.test(email)) return 'Please enter a valid email address';
     return '';
 };
 
 const validatePhone = (phone) => {
+    if (!phone) return 'Please enter your phone number';
     const phoneRegex = /^\d{10}$/;
-    if (!phoneRegex.test(phone)) {
-        return 'Please enter a valid 10-digit phone number';
-    }
+    if (!phoneRegex.test(phone)) return 'Please enter a valid 10-digit phone number';
     return '';
 };
 
 const validateCourse = (course) => {
-    if (!course) {
-        return 'Please select a course';
-    }
+    if (!course) return 'Please select a course';
     return '';
 };
 
-// Create and show error message
-const showError = (input, message) => {
-    // Remove any existing error message
-    const existingError = input.parentElement.querySelector('.error-message');
-    if (existingError) {
-        existingError.remove();
-    }
-
-    if (message) {
-        const errorDiv = document.createElement('div');
-        errorDiv.className = 'error-message';
-        errorDiv.style.color = 'red';
-        errorDiv.style.fontSize = '12px';
-        errorDiv.style.marginTop = '5px';
-        errorDiv.textContent = message;
-        input.parentElement.appendChild(errorDiv);
-        input.style.borderColor = 'red';
-    } else {
-        input.style.borderColor = 'green';
-    }
+// Show alert message function
+const showAlert = (messages) => {
+    let alertMessage = 'Please fix the following errors:\n\n';
+    messages.forEach(msg => {
+        alertMessage += '• ' + msg + '\n';
+    });
+    alert(alertMessage);
 };
 
 // Form submission handler
@@ -65,50 +45,65 @@ document.querySelector('.registration-form').addEventListener('submit', function
     const course = document.getElementById('course').value;
     const message = document.getElementById('message').value.trim();
 
-    // Validate all fields
+    // Collect all validation errors
+    const errors = [];
+    
+    // Validate each field and collect errors
     const nameError = validateFullName(fullName);
+    if (nameError) errors.push(nameError);
+    
     const emailError = validateEmail(email);
+    if (emailError) errors.push(emailError);
+    
     const phoneError = validatePhone(phone);
+    if (phoneError) errors.push(phoneError);
+    
     const courseError = validateCourse(course);
+    if (courseError) errors.push(courseError);
 
-    // Show validation messages
-    showError(document.getElementById('full-name'), nameError);
-    showError(document.getElementById('email'), emailError);
-    showError(document.getElementById('phone'), phoneError);
-    showError(document.getElementById('course'), courseError);
-
-    // If there are no errors, proceed with form submission
-    if (!nameError && !emailError && !phoneError && !courseError) {
-        // Create an object with form data
-        const formData = {
-            fullName,
-            email,
-            phone,
-            course,
-            message
-        };
-
-        // Store form data in sessionStorage for access on thanks.html
-        sessionStorage.setItem('formData', JSON.stringify(formData));
-
-        // Redirect to thanks.html
-        window.location.href = 'thanks.html';
+    // If there are errors, show alert and return
+    if (errors.length > 0) {
+        showAlert(errors);
+        return;
     }
+
+    // If no errors, show success message and proceed
+    alert('Registration successful!\n\nThank you for registering with us.');
+
+    // Create an object with form data
+    const formData = {
+        fullName,
+        email,
+        phone,
+        course,
+        message
+    };
+
+    // Store form data in sessionStorage
+    sessionStorage.setItem('formData', JSON.stringify(formData));
+
+    // Reset form and redirect
+    this.reset();
+    window.location.href = 'thanks.html';
 });
 
-// Real-time validation
+// Real-time field validation (optional)
 document.getElementById('full-name').addEventListener('blur', function() {
-    showError(this, validateFullName(this.value.trim()));
+    const error = validateFullName(this.value.trim());
+    if (error) alert(error);
 });
 
 document.getElementById('email').addEventListener('blur', function() {
-    showError(this, validateEmail(this.value.trim()));
+    const error = validateEmail(this.value.trim());
+    if (error) alert(error);
 });
 
 document.getElementById('phone').addEventListener('blur', function() {
-    showError(this, validatePhone(this.value.trim()));
+    const error = validatePhone(this.value.trim());
+    if (error) alert(error);
 });
 
 document.getElementById('course').addEventListener('change', function() {
-    showError(this, validateCourse(this.value));
+    const error = validateCourse(this.value);
+    if (error) alert(error);
 });
