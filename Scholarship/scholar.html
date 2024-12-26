@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scholarship Program</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Scholarship Program</h1>
+        
+        <div class="input-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" required>
+        </div>
+
+        <div class="fees-info">
+            Total fees for the LVC course is ₹100,000
+        </div>
+
+        <div class="grade-section">
+            <h2>12th Grade Marks</h2>
+            <div class="input-group">
+                <label for="12-math">Math:</label>
+                <input type="number" id="12-math" min="0" max="100" required>
+            </div>
+            <div class="input-group">
+                <label for="12-english">English:</label>
+                <input type="number" id="12-english" min="0" max="100" required>
+            </div>
+            <div class="input-group">
+                <label for="12-science">Science:</label>
+                <input type="number" id="12-science" min="0" max="100" required>
+            </div>
+            <div class="input-group">
+                <label for="12-computer">Computer:</label>
+                <input type="number" id="12-computer" min="0" max="100" required>
+            </div>
+        </div>
+
+        <div class="grade-section">
+            <h2>10th Grade Marks</h2>
+            <div class="input-group">
+                <label for="10-math">Math:</label>
+                <input type="number" id="10-math" min="0" max="100" required>
+            </div>
+            <div class="input-group">
+                <label for="10-english">English:</label>
+                <input type="number" id="10-english" min="0" max="100" required>
+            </div>
+            <div class="input-group">
+                <label for="10-science">Science:</label>
+                <input type="number" id="10-science" min="0" max="100" required>
+            </div>
+            <div class="input-group">
+                <label for="10-computer">Computer:</label>
+                <input type="number" id="10-computer" min="0" max="100" required>
+            </div>
+        </div>
+
+        <button onclick="calculateScholarship()">Calculate Scholarship</button>
+        <div id="result"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

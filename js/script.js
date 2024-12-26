@@ -8,6 +8,8 @@ document.addEventListener("DOMContentLoaded", () => {
         "all-courses": "<h2>All Courses</h2><p>Here is the list of all courses we offer.</p>",
         "registration": '<iframe id="registration-iframe" src="Registration/registration.html" frameborder="0" style="width: 100%; height: 500px;"></iframe>',
         "photo-gallery": '<iframe id="photo-gallery-iframe" src="PhotoGallery/photo-gallery.html" frameborder="0" style="width: 100%; height: 500px;"></iframe>',
+        "scholarship": '<iframe id="scholarship-iframe" src="Scholarship/scholar.html" frameborder="0" style="width: 100%; height: 700px;"></iframe>',
+        
         blog: "<iframe src='blog/blog.html' frameborder='0' style='width: 100%; height: 500px;'></iframe>",
         help: "<iframe src='help/help.html' frameborder='0' style='width: 100%; height: 500px;'></iframe>",
         "contact-us": `
