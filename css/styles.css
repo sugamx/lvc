@@ -343,3 +343,75 @@ footer a:hover {
         width: 100%;
     }
 }
+
+.subscribe-box {
+    position: fixed;
+    right: -300px; /* Start off-screen */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 250px;
+    background: white;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    border-radius: 8px 0 0 8px;
+    padding: 20px;
+    transition: right 0.3s ease;
+    z-index: 1000;
+    margin-right: 20px
+}
+
+.subscribe-box.show {
+    right: 20px; /* Slide in */
+}
+
+.subscribe-content {
+    text-align: center;
+}
+
+.subscribe-content h3 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+.subscribe-content p {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+#emailInput {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.subscribe-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.subscribe-buttons button {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.subscribe-buttons button:first-child {
+    background: #3498db;
+    color: white;
+    flex-grow: 1;
+}
+
+.close-btn {
+    background: #e74c3c;
+    color: white;
+    width: 50px;
+}
+
+.subscribe-buttons button:hover {
+    opacity: 0.9;
+}
