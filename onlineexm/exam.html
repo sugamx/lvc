@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Examination</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        .exam-container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        .header-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+        }
+
+        .user-info {
+            color: #2c3e50;
+            font-size: 14px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+        }
+
+        .question {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+        }
+
+        .options {
+            display: grid;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .option {
+            display: block;
+            padding: 10px 15px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .option:hover {
+            background: #f0f0f0;
+        }
+
+        .selected-correct {
+            background-color: #d4edda !important;
+            border-color: #c3e6cb !important;
+            color: #155724 !important;
+        }
+
+        .selected-incorrect {
+            background-color: #f8d7da !important;
+            border-color: #f5c6cb !important;
+            color: #721c24 !important;
+        }
+
+        .correct-answer {
+            border: 2px solid #28a745 !important;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #3498db, #2ecc71);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            display: block;
+            margin: 20px auto;
+            font-size: 16px;
+            transition: transform 0.2s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .submit-btn:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .result-container {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 8px;
+            background: #f8f9fa;
+            display: none;
+        }
+
+        .score {
+            text-align: center;
+            font-size: 24px;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .answer-feedback {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            background: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .answer-status {
+            font-weight: bold;
+            margin-bottom: 10px;
+            padding: 8px;
+            border-radius: 5px;
+        }
+
+        .correct-text {
+            color: #155724;
+            background-color: #d4edda;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 5px;
+        }
+
+        .wrong-text {
+            color: #721c24;
+            background-color: #f8d7da;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 5px;
+        }
+
+        .error-message {
+            color: #721c24;
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="exam-container">
+        <div class="header-info">
+            <div class="user-info">
+                <p>User: <strong>sugamx</strong></p>
+                <p>Date: <span id="currentDate"></span></p>
+                <p>Time: <span id="currentTime"></span></p>
+            </div>
+        </div>
+
+        <h1>Online Examination</h1>
+        
+        <div id="error-message" class="error-message"></div>
+
+        <form id="examForm">
+            <div class="question">
+                <h3>1. What is the capital of France?</h3>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q1" value="a"> London
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q1" value="b"> Paris
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q1" value="c"> Berlin
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q1" value="d"> Madrid
+                    </label>
+                </div>
+            </div>
+
+            <div class="question">
+                <h3>2. Which planet is known as the Red Planet?</h3>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q2" value="a"> Venus
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q2" value="b"> Jupiter
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q2" value="c"> Mars
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q2" value="d"> Saturn
+                    </label>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn">Submit Answers</button>
+        </form>
+
+        <div id="result" class="result-container"></div>
+    </div>
+
+    <script>
+        // Update date and time
+        function updateDateTime() {
+            const now = new Date();
+            document.getElementById('currentDate').textContent = now.toLocaleDateString();
+            document.getElementById('currentTime').textContent = now.toLocaleTimeString();
+        }
+
+        // Update time every second
+        updateDateTime();
+        setInterval(updateDateTime, 1000);
+
+        document.getElementById('examForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const errorMessage = document.getElementById('error-message');
+            errorMessage.style.display = 'none';
+            
+            // Get answers
+            const q1Answer = document.querySelector('input[name="q1"]:checked');
+            const q2Answer = document.querySelector('input[name="q2"]:checked');
+
+            // Validation
+            if (!q1Answer || !q2Answer) {
+                errorMessage.textContent = 'Please answer all questions!';
+                errorMessage.style.display = 'block';
+                return;
+            }
+
+            // Correct answers
+            const correctAnswers = {
+                q1: { value: 'b', text: 'Paris' },
+                q2: { value: 'c', text: 'Mars' }
+            };
+
+            let score = 0;
+            let feedback = '';
+
+            // Process each answer
+            function checkAnswer(questionNum, selectedAnswer, correct) {
+                const selectedOption = selectedAnswer.parentElement;
+                const correctOption = document.querySelector(`input[value="${correct.value}"]`).parentElement;
+                
+                if (selectedAnswer.value === correct.value) {
+                    selectedOption.classList.add('selected-correct');
+                    score += 2;
+                    return `
+                        <div class="answer-feedback">
+                            <div class="answer-status">Question ${questionNum}: Correct! ✅</div>
+                            <div class="correct-text">Your answer: ${correct.text}</div>
+                        </div>`;
+                } else {
+                    selectedOption.classList.add('selected-incorrect');
+                    correctOption.classList.add('correct-answer');
+                    return `
+                        <div class="answer-feedback">
+                            <div class="answer-status">Question ${questionNum}: Incorrect ❌</div>
+                            <div class="wrong-text">Your answer: ${selectedOption.textContent.trim()}</div>
+                            <div class="correct-text">Correct answer: ${correct.text}</div>
+                        </div>`;
+                }
+            }
+
+            // Check answers and build feedback
+            feedback += checkAnswer(1, q1Answer, correctAnswers.q1);
+            feedback += checkAnswer(2, q2Answer, correctAnswers.q2);
+
+            // Display results
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = `
+                <div class="score">
+                    <h2>Your Score: ${score}/4</h2>
+                    ${score === 4 ? '🎉 Perfect Score!' : 
+                      score >= 2 ? '👍 Good Job!' : 
+                      '📚 Keep Learning!'}
+                </div>
+                <div class="answers-summary">
+                    ${feedback}
+                </div>
+            `;
+            resultDiv.style.display = 'block';
+
+            // Disable form
+            document.querySelectorAll('input[type="radio"]').forEach(input => {
+                input.disabled = true;
+            });
+            this.querySelector('.submit-btn').disabled = true;
+        });
+    </script>
+</body>
+</html>

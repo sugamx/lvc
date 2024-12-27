@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
         "registration": '<iframe id="registration-iframe" src="Registration/registration.html" frameborder="0" style="width: 100%; height: 500px;"></iframe>',
         "photo-gallery": '<iframe id="photo-gallery-iframe" src="PhotoGallery/photo-gallery.html" frameborder="0" style="width: 100%; height: 500px;"></iframe>',
         "scholarship": '<iframe id="scholarship-iframe" src="Scholarship/scholar.html" frameborder="0" style="width: 100%; height: 700px;"></iframe>',
+        "online-exam": '<iframe id="exam-iframe" src="onlineexm/exam.html" frameborder="0" style="width: 100%; height: 700px;"></iframe>',
         blog: "<iframe src='blog/blog.html' frameborder='0' style='width: 100%; height: 500px;'></iframe>",
         help: "<iframe src='help/help.html' frameborder='0' style='width: 100%; height: 500px;'></iframe>",
         "contact-us": `<iframe src="ContactForm/contact-form.html" frameborder="0" style="width: 100%; height: 600px; border: none; border-radius: 5px; background: transparent; outline: none;"></iframe>`
@@ -117,4 +118,11 @@ function isValidEmail(email) {
     // Basic email validation regex
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
+}
+
+
+function redirectToSite(url) {
+    if(url) {
+        window.open(url, '_blank'); // Opens in new tab
+    }
 }
