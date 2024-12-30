@@ -1,5 +1,3 @@
-// contact-validation.js
-
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.querySelector('.contact-form');
 
@@ -24,75 +22,78 @@ document.addEventListener('DOMContentLoaded', () => {
         return '';
     };
 
-    // Show alert messages function
-    const showAlerts = (errors) => {
-        if (errors.length > 0) {
-            let alertMessage = 'Please fix the following:\n\n';
-            errors.forEach(error => {
-                alertMessage += `• ${error}\n`;
-            });
-            alert(alertMessage);
-            return false;
+    // Function to create or update error message
+    const showFieldError = (field, error) => {
+        let errorDiv = field.nextElementSibling;
+        if (!errorDiv || !errorDiv.classList.contains('error-message')) {
+            errorDiv = document.createElement('div');
+            errorDiv.className = 'error-message';
+            errorDiv.style.color = 'red';
+            errorDiv.style.fontSize = '0.8em';
+            errorDiv.style.marginTop = '5px';
+            field.parentNode.insertBefore(errorDiv, field.nextSibling);
         }
-        return true;
+        errorDiv.textContent = error;
+        field.classList.toggle('invalid', error !== '');
     };
 
-    // Add blur event listeners for real-time validation
-    document.getElementById('name').addEventListener('blur', function() {
-        const error = validateName(this.value.trim());
-        if (error) alert(error);
-    });
+    // Function to validate a field and show/hide error
+    const validateField = (field, validationFn) => {
+        const error = validationFn(field.value.trim());
+        showFieldError(field, error);
+        return error === '';
+    };
 
-    document.getElementById('email').addEventListener('blur', function() {
-        const error = validateEmail(this.value.trim());
-        if (error) alert(error);
-    });
+    // Add input event listeners for real-time validation
+    const nameInput = document.getElementById('name');
+    const emailInput = document.getElementById('email');
+    const messageInput = document.getElementById('message');
 
-    document.getElementById('message').addEventListener('blur', function() {
-        const error = validateMessage(this.value.trim());
-        if (error) alert(error);
-    });
+    nameInput.addEventListener('input', () => validateField(nameInput, validateName));
+    emailInput.addEventListener('input', () => validateField(emailInput, validateEmail));
+    messageInput.addEventListener('input', () => validateField(messageInput, validateMessage));
 
     // Form submission handler
     form.addEventListener('submit', (e) => {
         e.preventDefault();
 
-        // Get all input values
-        const name = document.getElementById('name').value.trim();
-        const email = document.getElementById('email').value.trim();
-        const message = document.getElementById('message').value.trim();
+        // Validate all fields
+        const isNameValid = validateField(nameInput, validateName);
+        const isEmailValid = validateField(emailInput, validateEmail);
+        const isMessageValid = validateField(messageInput, validateMessage);
 
-        // Collect all errors
-        const errors = [];
-        
-        const nameError = validateName(name);
-        if (nameError) errors.push(nameError);
-        
-        const emailError = validateEmail(email);
-        if (emailError) errors.push(emailError);
-        
-        const messageError = validateMessage(message);
-        if (messageError) errors.push(messageError);
+        // If all fields are valid, proceed with submission
+        if (isNameValid && isEmailValid && isMessageValid) {
+            // Create form data object
+            const formData = {
+                name: nameInput.value.trim(),
+                email: emailInput.value.trim(),
+                message: messageInput.value.trim(),
+                timestamp: new Date().toISOString()
+            };
 
-        // Show errors if any
-        if (!showAlerts(errors)) {
-            return;
+            console.log('Form submitted:', formData);
+
+            // Show success message
+            const successMessage = document.createElement('div');
+            successMessage.className = 'success-message';
+            successMessage.style.color = 'green';
+            successMessage.style.padding = '10px';
+            successMessage.style.marginTop = '10px';
+            successMessage.textContent = 'Thank you for your message! We will get back to you soon.';
+            
+            form.insertAdjacentElement('afterend', successMessage);
+
+            // Reset form
+            form.reset();
+
+            // Remove success message after 5 seconds
+            setTimeout(() => {
+                successMessage.remove();
+            }, 5000);
+
+            // Clear any remaining error messages
+            document.querySelectorAll('.error-message').forEach(el => el.textContent = '');
         }
-
-        // If no errors, show success and submit
-        alert('Thank you for your message!\nWe will get back to you soon.');
-        
-        // Create form data object
-        const formData = {
-            name,
-            email,
-            message,
-            timestamp: new Date().toISOString()
-        };
-
-        console.log('Form submitted:', formData);
-        
-        // Reset form
-        form.reset();
     });
 });

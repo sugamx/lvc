@@ -125,3 +125,21 @@ body {
         height: 250px;
     }
 }
+
+
+.contact-form input.invalid,
+.contact-form textarea.invalid {
+    border-color: red;
+}
+
+.error-message {
+    color: red;
+    font-size: 0.8em;
+    margin-top: 5px;
+}
+
+.success-message {
+    color: green;
+    padding: 10px;
+    margin-top: 10px;
+}
