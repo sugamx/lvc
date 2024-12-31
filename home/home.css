@@ -9,10 +9,16 @@ html, body {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
-    font-family: Arial, sans-serif;
-    background-color: #f8f8f8;
+    overflow-y: auto; /* Change to auto to show only when needed */
+    height: 100%;
+    width: 100%;
 }
 
+/* Make sure the content div takes full height */
+div {
+    min-height: 100vh;
+    width: 100%;
+}
 h2 {
     font-size: 3.2em;
     font-family: 'Times New Roman', Times, serif;
@@ -20,6 +26,28 @@ h2 {
     margin-top: 20px;
 }
 
+.video-container {
+    text-align: center;
+    margin: 20px auto; /* Changed from margin-top to margin */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: calc(100vh - 200px); /* Adjust based on your header/text height */
+}
+
+.video-container video {
+    max-width: 90%; /* Changed from 100% */
+    width: auto;
+    height: auto;
+    max-height: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    object-fit: contain; /* Ensures video maintains aspect ratio */
+}
+
+/* Adjust the paragraph spacing above the video */
 p {
     font-size: 1.2em;
     line-height: 1.6;
@@ -28,19 +56,32 @@ p {
     text-align: justify;
     max-width: 800px;
     padding: 10px;
+    margin-bottom: 10px; /* Reduced bottom margin */
 }
 
-.video-container {
-    text-align: center;
-    margin-top: 20px;
+/* Adjust lightbox video sizing */
+.lightbox-content video {
+    width: 90vw; /* Viewport width */
+    max-height: 80vh; /* Viewport height */
+    object-fit: contain;
 }
 
-.video-container video {
-    max-width: 100%;
-    width: 600px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    cursor: pointer; /* Show pointer on hover */
+/* Media queries for better responsiveness */
+@media (max-width: 768px) {
+    .video-container {
+        height: calc(100vh - 250px); /* Adjusted for mobile */
+    }
+    
+    .video-container video {
+        max-width: 95%;
+    }
+}
+
+@media (min-width: 1200px) {
+    .video-container video {
+        width: 800px; /* Larger size for bigger screens */
+        max-height: 600px;
+    }
 }
 
 /* Lightbox Styles */

@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Content for each menu item
     const contentMap = {
-        home: '<iframe id="home-iframe" src="home/home.html" frameborder="0"   style=" width: 100%; height: 500px; scrollbar-width: none; -ms-overflow-style: none;  overflow: hidden; "></iframe>' ,
+         home: '<iframe id="home-iframe" src="home/home.html" frameborder="0" style="width: 100%; height: 100vh; border: none;"></iframe>',
         "all-courses": "<h2>All Courses</h2><p>Here is the list of all courses we offer.</p>",
         "registration": '<iframe id="registration-iframe" src="Registration/registration.html" frameborder="0" style="width: 100%; height: 500px;"></iframe>',
         "photo-gallery": '<iframe id="photo-gallery-iframe" src="PhotoGallery/photo-gallery.html" frameborder="0" style="width: 100%; height: 500px;"></iframe>',
